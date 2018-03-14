@@ -1,0 +1,39 @@
+{
+  "name": "modelorama",
+  "version": "0.0.0",
+  "main": "index.js",
+  "bin": {
+    "modelo": "bin/cli"
+  },
+  "description": "Tame schemas once and for all!",
+  "license": "MIT",
+  "author": "Alvaro Cabrera <pateketrueke@gmail.com> (https://soypache.co)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tacoss/modelorama"
+  },
+  "bugs": "https://github.com/tacoss/modelorama/issues",
+  "types": "index.d.ts",
+  "files": [
+    "bin/**",
+    "*.d.ts",
+    "*.js"
+  ],
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "lint": "eslint bin/*.js *.js",
+    "test": "npm run lint"
+  },
+  "dependencies": {
+    "@grown/bud": "^0.0.39",
+    "@grown/cli": "^0.0.55",
+    "@grown/graphql": "^0.0.18",
+    "@grown/grpc": "^0.0.16",
+    "@grown/model": "^0.0.42",
+    "json-schema-to": "^0.0.29",
+    "sastre": "^0.2.19",
+    "typedoc": "^0.22.10"
+  }
+}
