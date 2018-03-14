@@ -1,0 +1,10 @@
+{
+  "id": "Example",
+  "properties": {
+    "id": {
+      "type": "integer",
+      "primaryKey": true,
+      "autoIncrement": true
+    }
+  }
+}
