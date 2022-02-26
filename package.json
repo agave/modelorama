@@ -30,19 +30,19 @@
   "dependencies": {
     "@grown/graphql": "^0.0.19",
     "@grown/grpc": "^0.0.17",
-    "@grown/model": "^0.0.44",
+    "@grown/model": "^0.0.45",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
     "json-schema-to": "^0.0.31",
     "sastre": "^0.2.20",
-    "typedoc": "^0.22.10"
+    "typedoc": "^0.22.15"
   },
   "devDependencies": {
     "grown": "^1.2.3",
     "sqlite3": "^5.0.2",
     "ts-node": "^10.4.0",
-    "typescript": "^4.5.4"
+    "typescript": "^4.6.4"
   },
   "peerDependencies": {
     "grown": "*"
