@@ -23,12 +23,12 @@ module.exports = Grown => {
   }
 };
 
-module.exports.setup = fn => opts => Grown => {
+module.exports.setup = fn => opts => async Grown => {
   fn(Grown, opts);
 
   return Grown('Models', {
     include: [
-      Grown.Model.DB.bundle({
+      await Grown.Model.DB.bundle({
         types: join(opts.config.directory, 'generated'),
         models: join(opts.config.directory, 'models'),
         database: {
