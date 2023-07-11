@@ -25,7 +25,7 @@
   "scripts": {
     "lint": "eslint bin/*.js *.js",
     "test": "npm run lint && ts-node --type-check tests/check-server && ts-node --type-check tests/check-types",
-    "pretest": "bin/cli.js model schema tests/schema && bin/cli.js model types tests/schema --app ../server.js"
+    "pretest": "bin/cli.js model schema tests/schema && bin/cli.js model types tests/schema --app ./tests/server.js"
   },
   "dependencies": {
     "@grown/graphql": "^0.0.20",
