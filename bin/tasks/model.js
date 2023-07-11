@@ -12,10 +12,10 @@ const USAGE_INFO = `
     __HOOKS__
 
   Examples:
-    {bin} build docs
-    {bin} build types path/to/database
-    {bin} build schema path/to/database --docs
-    {bin} build path/to/database -ti server.js Routes:routes
+    {bin} model docs
+    {bin} model types path/to/database
+    {bin} model schema path/to/database --docs
+    {bin} model path/to/database -ti server.js Routes:routes
 
 `;
 
@@ -26,7 +26,7 @@ const DOCS_USAGE = `
   PATH  Directory to search for files
 
   All TypeScript sources are scanned to build the documentation,
-  generated types can be annotated too, e.g. \`{bin} build schema db --docs\`
+  generated types can be annotated too, e.g. \`{bin} model schema db --docs\`
 
 `;
 

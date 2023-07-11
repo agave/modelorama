@@ -19,7 +19,7 @@ interface ModelsConfig {
 }
 
 export interface Modelorama {
-  setup<DB>(fn: (Grown: GrownInterface) => void): (opts: ModelsConfig) => (Grown: GrownInterface) => Repository<DB>;
+  setup<DB>(fn: (Grown: GrownInterface) => void): (opts: ModelsConfig) => (Grown: GrownInterface) => Promise<Repository<DB>>;
 }
 
 export interface ModeloramaServices extends GRPCInterface {
