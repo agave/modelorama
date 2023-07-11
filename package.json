@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "index.js",
   "bin": {
-    "pot": "bin/cli"
+    "pot": "bin/cli.js"
   },
   "description": "Tame schemas once and for all!",
   "license": "MIT",
@@ -25,7 +25,7 @@
   "scripts": {
     "lint": "eslint bin/*.js *.js",
     "test": "npm run lint && ts-node --type-check tests/check-server && ts-node --type-check tests/check-types",
-    "pretest": "bin/cli model schema tests/schema && bin/cli model types tests/schema --app ../server.js"
+    "pretest": "bin/cli.js model schema tests/schema && bin/cli.js model types tests/schema --app ../server.js"
   },
   "dependencies": {
     "@grown/graphql": "^0.0.20",

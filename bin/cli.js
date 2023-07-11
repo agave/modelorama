@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const Grown = require('@grown/bud')();
 const util = require('@grown/bud/util');
 const pkg = require('../package.json');
@@ -24,7 +26,7 @@ Grown.use(require('./main'));
 Grown('CLI', {
   banner_text: false,
   command_line: argv,
-  command_name: 'mdl',
+  command_name: 'pot+mdl',
   task_folders: [`${__dirname}/tasks`],
 });
 
