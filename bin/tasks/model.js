@@ -103,13 +103,12 @@ module.exports = {
       if (!Grown.argv._[2]) throw new Error('Missing application path');
 
       const cwd = Grown.argv._[2].replace(/\/$/, '');
-      const app = relative(cwd, process.main || Grown.argv.flags.app || 'app.js');
+      const app = process.main || Grown.argv.flags.app || 'app.js';
+      const main = relative(cwd, app);
 
-      const appTs = `${app.replace(/\.[mc]?js$/, '')}.d.ts`;
-      const appDir = app.replace('..', dirname(cwd));
+      const appTs = `${main.replace(/\.[mc]?js$/, '')}.d.ts`;
       const dts = join(cwd, appTs);
 
-      const baseDir = cwd.replace(`${appDir}/`, '');
       const rootDir = cwd.includes('/') ? dirname(cwd) : cwd;
 
       const modelsDir = Grown.argv.flags.models || join(cwd, 'models');
@@ -117,22 +116,22 @@ module.exports = {
       const handlersDir = Grown.argv.flags.handlers || join(cwd, 'handlers');
       const resolversDir = Grown.argv.flags.resolvers || join(cwd, 'resolvers');
 
-      const here = filepath => (filepath.charAt() === '.' ? filepath : `.${baseDir ? `/${baseDir}` : ''}/${filepath}`);
+      const here = filepath => `./${relative(rootDir, filepath)}`;
 
       if (!existsSync(dts)) {
         const routes = Grown.argv.flags.routes !== false && existsSync(routesDir);
         const handlers = Grown.argv.flags.handlers !== false && existsSync(handlersDir);
         const resolvers = Grown.argv.flags.resolvers !== false && existsSync(resolversDir);
-        const modelsPath = here(relative(cwd, modelsDir));
+        const modelsPath = here(modelsDir);
 
         Grown.CLI._.write(dts, [
           'import { ModeloramaServices, GrownInterface',
           handlers ? ', GRPCService' : '',
           ", Repository } from 'modelorama';\n",
           `import type Models from '${modelsPath}';\n`,
-          routes ? `import type Routes from '${here(relative(rootDir, routesDir))}';\n` : '',
-          handlers ? `import type Handlers from '${here(relative(rootDir, handlersDir))}';\n` : '',
-          resolvers ? `import type Resolvers from '${here(relative(rootDir, resolversDir))}';\n` : '',
+          routes ? `import type Routes from '${here(routesDir)}';\n` : '',
+          handlers ? `import type Handlers from '${here(handlersDir)}';\n` : '',
+          resolvers ? `import type Resolvers from '${here(resolversDir)}';\n` : '',
           '\n',
           `export { default as DB } from '${modelsPath}';\n`,
           `export * from '${modelsPath}';\n`,
@@ -166,7 +165,7 @@ module.exports = {
 
       return Grown.CLI._exec([require.resolve('sastre/bin/cli'),
         Grown.argv._[2],
-        '-bti', app,
+        '-bti', main,
         ...['Models', 'Routes', 'Handlers', 'Resolvers'].map(types),
       ].filter(Boolean), () => process.exit());
     });

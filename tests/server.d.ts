@@ -1,12 +1,12 @@
-import { Repository, GrownInterface } from '..';
+import { GrownInterface, Repository } from '..';
 import type Models from './schema/models';
 
 export { default as DB } from './schema/models';
 export * from './schema/models';
 
-export interface Server extends GrownInterface {
-  Models: Promise<Repository<Models>>;
+export interface Application extends GrownInterface {
+  Models: Repository<Models>;
 }
 
-declare const _default: Server;
+declare const _default: Application;
 export default _default;
