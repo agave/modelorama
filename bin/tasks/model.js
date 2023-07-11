@@ -59,7 +59,7 @@ const { sync } = require('glob');
 module.exports = {
   description: USAGE_INFO,
   configure(Grown) {
-    Grown.CLI.define('build:docs', DOCS_USAGE, () => {
+    Grown.CLI.define('model:docs', DOCS_USAGE, () => {
       if (!Grown.argv._[2]) throw new Error('Missing application path');
 
       const cwd = join(Grown.cwd, Grown.argv._[2]);
@@ -99,7 +99,7 @@ module.exports = {
       }
     });
 
-    Grown.CLI.define('build:types', TYPES_USAGE, () => {
+    Grown.CLI.define('model:types', TYPES_USAGE, () => {
       if (!Grown.argv._[2]) throw new Error('Missing application path');
 
       const cwd = Grown.argv._[2];
@@ -169,7 +169,7 @@ module.exports = {
       ].filter(Boolean), () => process.exit());
     });
 
-    Grown.CLI.define('build:schema', SCHEMA_USAGE, () => {
+    Grown.CLI.define('model:schema', SCHEMA_USAGE, () => {
       if (!Grown.argv.params.models) {
         throw new Error(`Missing models:PATH to load, given '${Grown.argv.params.models || ''}'`);
       }
@@ -222,7 +222,7 @@ module.exports = {
     });
   },
   callback(Grown) {
-    const tasks = Grown.CLI.subtasks('build');
+    const tasks = Grown.CLI.subtasks('model');
 
     if (!Grown.argv.params.models && Grown.argv._[2]) {
       Grown.argv.params.models = Grown.argv._[2];
