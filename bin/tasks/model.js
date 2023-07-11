@@ -109,6 +109,7 @@ module.exports = {
       const appTs = `${main.replace(/\.[mc]?js$/, '')}.d.ts`;
       const dts = join(cwd, appTs);
 
+      const inRoot = !dts.includes('/');
       const rootDir = cwd.includes('/') ? dirname(cwd) : cwd;
 
       const modelsDir = Grown.argv.flags.models || join(cwd, 'models');
@@ -116,7 +117,7 @@ module.exports = {
       const handlersDir = Grown.argv.flags.handlers || join(cwd, 'handlers');
       const resolversDir = Grown.argv.flags.resolvers || join(cwd, 'resolvers');
 
-      const here = filepath => `./${relative(rootDir, filepath)}`;
+      const here = filepath => `./${inRoot ? filepath : relative(rootDir, filepath)}`;
 
       if (!existsSync(dts)) {
         const routes = Grown.argv.flags.routes !== false && existsSync(routesDir);
