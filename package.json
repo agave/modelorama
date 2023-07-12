@@ -30,7 +30,7 @@
   "dependencies": {
     "@grown/graphql": "^0.0.20",
     "@grown/grpc": "^0.0.19",
-    "@grown/model": "^0.0.59",
+    "@grown/model": "^0.0.60",
     "json-schema-to": "^0.0.36",
     "sastre": "^0.3.10",
     "typedoc": "^0.24.8"
@@ -40,7 +40,7 @@
     "eslint": "^8.44.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.22.1",
-    "grown": "^1.4.13",
+    "grown": "^1.4.15",
     "sqlite3": "^5.0.2",
     "ts-node": "^10.4.0",
     "typescript": "^5.1.6"
