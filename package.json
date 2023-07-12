@@ -32,7 +32,7 @@
     "@grown/grpc": "^0.0.19",
     "@grown/model": "^0.0.59",
     "json-schema-to": "^0.0.36",
-    "sastre": "^0.3.8",
+    "sastre": "^0.3.9",
     "typedoc": "^0.24.8"
   },
   "devDependencies": {
