@@ -1,6 +1,6 @@
 {
   "name": "modelorama",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "main": "index.js",
   "bin": {
     "pot": "bin/cli.js"
