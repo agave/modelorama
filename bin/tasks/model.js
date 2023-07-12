@@ -103,8 +103,7 @@ module.exports = {
       if (!Grown.argv._[2]) throw new Error('Missing application path');
 
       const cwd = Grown.argv._[2].replace(/\/$/, '');
-      const app = process.main || Grown.argv.flags.app || 'app.js';
-      const main = relative(cwd, app);
+      const main = relative(cwd, Grown.app);
 
       const appTs = `${main.replace(/\.[mc]?js$/, '')}.d.ts`;
       const dts = join(cwd, appTs);
