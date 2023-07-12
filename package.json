@@ -31,8 +31,8 @@
     "@grown/graphql": "^0.0.20",
     "@grown/grpc": "^0.0.19",
     "@grown/model": "^0.0.59",
-    "json-schema-to": "^0.0.35",
-    "sastre": "^0.3.6",
+    "json-schema-to": "^0.0.36",
+    "sastre": "^0.3.8",
     "typedoc": "^0.24.8"
   },
   "devDependencies": {

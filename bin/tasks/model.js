@@ -158,16 +158,20 @@ module.exports = {
       function types(kind) {
         const key = kind.toLowerCase();
         const subDir = Grown.argv.flags[key] || join(cwd, key);
-        const fixed = `${kind}:${relative(cwd, subDir)}`;
+        const fixed = { [kind]: relative(cwd, subDir) };
 
         if (existsSync(subDir)) return fixed;
       }
 
-      return Grown.CLI._exec([require.resolve('sastre/bin/cli'),
-        Grown.argv._[2],
-        '-bti', main,
-        ...['Models', 'Routes', 'Handlers', 'Resolvers'].map(types),
-      ].filter(Boolean), () => process.exit());
+      return require('sastre/bin/main').build({
+        _: [Grown.argv._[2]],
+        flags: {
+          bail: true,
+          types: true,
+          import: main,
+        },
+        params: ['Models', 'Routes', 'Handlers', 'Resolvers'].reduce((memo, cur) => Object.assign(memo, types(cur)), {}),
+      });
     });
 
     Grown.CLI.define('model:schema', SCHEMA_USAGE, () => {
@@ -208,20 +212,26 @@ module.exports = {
         ].join(''));
       }
 
-      return Grown.CLI._exec([require.resolve('json-schema-to/bin/cli'),
-        '-btw', cwd,
-        '-i', 'uiSchema',
-        '-qpc', 'index',
-        '-k', 'API',
-        '--typescript',
-        '--module',
-        '--json',
-        Grown.argv.flags.esm ? '--esm' : null,
-        Grown.argv.flags.docs ? '-D' : null,
-        handlers ? '--protobuf' : null,
-        resolvers ? '--graphql' : null,
-        ...(handlers ? ['-r', '../common'] : []),
-      ].filter(Boolean), () => process.exit());
+      return require('json-schema-to/bin/main').build({
+        flags: {
+          esm: Grown.argv.flags.esm,
+          docs: Grown.argv.flags.docs,
+          refs: handlers ? '../common' : null,
+          protobuf: handlers,
+          graphql: resolvers,
+          common: 'index',
+          ignore: 'uiSchema',
+          typescript: true,
+          module: true,
+          json: true,
+          queries: true,
+          bundle: true,
+          prune: true,
+          types: true,
+          pkg: 'API',
+          cwd,
+        },
+      });
     });
   },
   callback(Grown) {
@@ -235,6 +245,6 @@ module.exports = {
       return tasks[Grown.argv._[1]].callback();
     }
 
-    return Grown.CLI._exec([require.resolve('sastre/bin/cli'), ...process.argv.slice(3)], () => process.exit());
+    return require('sastre/bin/main').watch(Grown.argv);
   },
 };

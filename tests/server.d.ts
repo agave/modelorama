@@ -5,7 +5,7 @@ export { default as DB } from './schema/models';
 export * from './schema/models';
 
 export interface Application extends GrownInterface {
-  Models: Repository<Models>;
+  Models: Promise<Repository<Models>>;
 }
 
 declare const _default: Application;
