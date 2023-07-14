@@ -54,7 +54,7 @@ const SCHEMA_USAGE = `
 
 const { join, relative, dirname } = require('path');
 const { existsSync } = require('fs');
-const { sync } = require('glob');
+const { sync } = require('fast-glob');
 
 module.exports = {
   description: USAGE_INFO,

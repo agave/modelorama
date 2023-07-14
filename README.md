@@ -32,10 +32,8 @@ module.exports = Grown;
 Now write a `db/index.js` file with the following code:
 
 ```js
-module.exports = require('./generated')(require('modelorama')
-  .setup(Grown => {
-    Grown.use(require('@grown/model'));
-  })({
+module.exports = Grown => require('./generated')(require('modelorama')
+  .setup(Grown, {
     refs: require('./generated').default,
     config: {
       dialect: 'sqlite',
@@ -139,18 +137,19 @@ main();
 Also you can type the whole connection at once:
 
 ```typescript
+import Grown from './db/app';
 import Modelorama from 'modelorama';
 import type { DB, User } from './db/app';
 
-const Models = Modelorama.setup<DB>(Grown => {
-  Grown.use(require('@grown/model'));
-})({
+Grown.use(require('@grown/model'));
+
+const Models = await Modelorama.setup<DB>(Grown, {
   config: {
     dialect: 'sqlite',
     storage: '/tmp/db.sqlite',
     directory: `${__dirname}/db`,
   },
-})(require('@grown/bud')());
+});
 
 const UserModel = Models.get('User').getSchema<User>();
 

@@ -1,11 +1,9 @@
-module.exports = {
-  Models: require('..').setup(Grown => {
-    Grown.use(require('@grown/model'));
-  })({
+module.exports = async Grown => ({
+  Models: await require('..').setup(Grown, {
     config: {
       dialect: 'sqlite',
       storage: '/tmp/db.sqlite',
       directory: `${__dirname}/schema`,
     },
-  })(require('@grown/bud')()),
-};
+  }),
+});

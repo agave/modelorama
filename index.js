@@ -23,23 +23,19 @@ module.exports = Grown => {
   }
 };
 
-module.exports.setup = fn => opts => async Grown => {
-  fn(Grown, opts);
-
-  return Grown('Models', {
-    include: [
-      await Grown.Model.DB.bundle({
-        types: join(opts.config.directory, 'generated'),
-        models: join(opts.config.directory, 'models'),
-        database: {
-          refs: opts.refs,
-          hooks: opts.hooks,
-          config: opts.config,
-        },
-      }),
-    ],
-  });
-};
+module.exports.setup = async (Grown, opts) => Grown('Models', {
+  include: await Promise.all([
+    Grown.Model.DB.bundle({
+      types: join(opts.config.directory, 'generated'),
+      models: join(opts.config.directory, 'models'),
+      database: {
+        refs: opts.refs,
+        hooks: opts.hooks,
+        config: opts.config,
+      },
+    }),
+  ]),
+});
 
 module.exports.plug = (Grown, server) => {
   const db = Grown.Model.DB.default;
