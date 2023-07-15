@@ -1,9 +1,10 @@
-module.exports = async Grown => ({
-  Models: await require('..').setup(Grown, {
-    config: {
-      dialect: 'sqlite',
-      storage: '/tmp/db.sqlite',
-      directory: `${__dirname}/schema`,
-    },
-  }),
-});
+module.exports = async () => {
+  const Grown = await require('./main');
+  const server = new Grown();
+
+  server.on('listen', app => {
+    console.log(app.location.href);
+  });
+
+  return server;
+};

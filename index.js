@@ -23,19 +23,31 @@ module.exports = Grown => {
   }
 };
 
-module.exports.setup = async (Grown, opts) => Grown('Models', {
-  include: await Promise.all([
-    Grown.Model.DB.bundle({
-      types: join(opts.config.directory, 'generated'),
-      models: join(opts.config.directory, 'models'),
-      database: {
-        refs: opts.refs,
-        hooks: opts.hooks,
-        config: opts.config,
-      },
-    }),
-  ]),
-});
+module.exports.setup = (Grown, opts) => {
+  if (!opts) {
+    opts = Grown;
+    Grown = null;
+  }
+
+  const factory = async _ => _('Models', {
+    include: await Promise.all([
+      _.Model.DB.bundle({
+        types: join(opts.config.directory, 'generated'),
+        models: join(opts.config.directory, 'models'),
+        database: {
+          refs: opts.refs,
+          hooks: opts.hooks,
+          config: opts.config,
+        },
+      }),
+    ]),
+  });
+
+  if (Grown) {
+    return factory(Grown);
+  }
+  return factory;
+};
 
 module.exports.plug = (Grown, server) => {
   const db = Grown.Model.DB.default;

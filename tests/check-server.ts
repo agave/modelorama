@@ -1,8 +1,9 @@
-import ServerInstance from './server';
-import type { ExampleModel } from './server';
+import ServerInstance from './main';
+import type { ExampleModel } from './main';
 
 async function main() {
-  const { get, connect } = await ServerInstance.Models;
+  const Grown = await ServerInstance;
+  const { get, connect } = Grown.Models;
 
   await connect();
 

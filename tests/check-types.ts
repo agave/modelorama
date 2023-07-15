@@ -1,10 +1,12 @@
 import Modelorama from '..';
-import Grown from './server';
-import type { DB, Example } from './server';
-
-Grown.use(require('@grown/model'));
+import ServerInstance from './main';
+import type { DB, Example } from './main';
 
 async function main() {
+  const Grown = await ServerInstance;
+
+  Grown.use(require('@grown/model'));
+
   const Models = await Modelorama.setup<DB>(Grown, {
     config: {
       dialect: 'sqlite',

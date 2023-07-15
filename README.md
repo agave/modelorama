@@ -24,7 +24,7 @@ const Grown = require('grown')();
 Grown.use(require('.'));
 Grown.use(require('modelorama'));
 
-module.exports = Grown;
+module.exports = Grown.ready();
 ```
 
 > Here we're also registering `modelorama` to enable the discovery of `db/resolvers` and `db/handlers` if GraphQL and gRPC are enabled respectively.
@@ -32,8 +32,8 @@ module.exports = Grown;
 Now write a `db/index.js` file with the following code:
 
 ```js
-module.exports = Grown => require('./generated')(require('modelorama')
-  .setup(Grown, {
+module.exports = require('./generated')(require('modelorama')
+  .setup({
     refs: require('./generated').default,
     config: {
       dialect: 'sqlite',
@@ -48,15 +48,17 @@ module.exports = Grown => require('./generated')(require('modelorama')
 Finally, you'll need to write a `server.js` file:
 
 ```js
-const Grown = require('./db/app');
+module.exports = async () => {
+  const Grown = await require('./db/app');
+  const server = new Grown();
 
-const server = new Grown();
+  server.on('listen', app => {
+    console.log(app.location.href);
+  });
 
-server.on('listen', app => {
-  console.log(app.location.href);
-});
+  return server;
+};
 
-module.exports = server;
 ```
 
 > The later script will let you start the application server with `pot server start`
