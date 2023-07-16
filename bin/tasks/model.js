@@ -118,7 +118,7 @@ module.exports = {
 
       const here = filepath => `./${inRoot ? filepath : relative(rootDir, filepath)}`;
 
-      if (!existsSync(dts)) {
+      if (Grown.argv.flags.force || !existsSync(dts)) {
         const routes = Grown.argv.flags.routes !== false && existsSync(routesDir);
         const handlers = Grown.argv.flags.handlers !== false && existsSync(handlersDir);
         const resolvers = Grown.argv.flags.resolvers !== false && existsSync(resolversDir);
