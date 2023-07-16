@@ -28,20 +28,20 @@
     "pretest": "bin/cli.js model schema tests/schema && bin/cli.js model types tests/schema --app ./tests/main.js"
   },
   "dependencies": {
-    "@grown/graphql": "^0.0.20",
-    "@grown/grpc": "^0.0.19",
-    "@grown/model": "^0.0.62",
+    "@grown/model": "^0.0.63",
     "fast-glob": "^3.3.0",
     "json-schema-to": "^0.0.37",
     "sastre": "^0.3.10",
     "typedoc": "^0.24.8"
   },
   "devDependencies": {
+    "@grown/graphql": "^0.0.20",
+    "@grown/grpc": "^0.0.19",
     "@grown/router": "^0.0.21",
     "eslint": "^8.44.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.22.1",
-    "grown": "^1.4.20",
+    "grown": "^1.4.21",
     "sqlite3": "^5.0.2",
     "ts-node": "^10.4.0",
     "typescript": "^5.1.6"
